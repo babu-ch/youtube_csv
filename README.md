@@ -7,6 +7,9 @@ cp .env.example .env
 
 npm i
 
+node index.js <channelId> --maxPage=1
+
+# 全部取得するならmaxPageを外す
 node index.js <channelId>
 ```
 

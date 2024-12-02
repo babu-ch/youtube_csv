@@ -6,7 +6,7 @@ require("./lib/config")
 async function main() {
   const fields = global.options.fields.split(",").map(f => f.split(":"))
 
-  const header = fields.map(f => ({id:f[0], title:f[1]}))
+  const header = fields.map(f => ({id:f[0], title:f[0]}))
   const csv = new CSV(global.options.output, header)
 
   for await (const videos of searchVideos(global.channelId, global.options)) {

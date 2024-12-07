@@ -6,13 +6,13 @@ cp .env.example .env
 
 npm i
 
-node index.js <channelId>
+npm run start -- <channelId>
 
 # option
 
-node index.js --help
+npm run start -- --help
 
 
 # ex
 
-node index.js <ch> --output=test.csv --pageToken=token --maxPage=5
+npm run start -- <ch> --output=test.csv --pageToken=token --maxPage=5

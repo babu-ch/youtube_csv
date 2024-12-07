@@ -1,27 +1,29 @@
-require('dotenv').config()
+import {Options} from "./config"
+import dotenv from "dotenv"
+dotenv.config()
+import {google} from "googleapis"
+import {get} from "lodash"
+import {youtube_v3} from "googleapis/build/src/apis/youtube/v3";
 
 const API_KEY = process.env.YOUTUBE_API_KEY
 
 const DEFAULT_PARAMS = {
-  part: "snippet",
+  part: ["snippet"],
   maxResults: 50,
   type: "video",
   order: "date"
 }
-
-const {google} = require("googleapis")
-const {get} = require("lodash")
 
 const youtube = google.youtube({
   version: "v3",
   auth: API_KEY,
 })
 
-async function fetchPlaylistId(channelId) {
+async function fetchPlaylistId(channelId:string) {
   const res = await youtube.channels.list({
-    id: channelId,
-    part: "contentDetails,snippet"
-  })
+    id: [channelId],
+    part: ["contentDetails,snippet"]
+  } as youtube_v3.Params$Resource$Channels$List)
   if (!res.data.items || !res.data.items.length) {
     throw new Error(`No items ${channelId}`)
   }
@@ -34,11 +36,11 @@ async function fetchPlaylistId(channelId) {
   return id
 }
 
-module.exports = async function* searchVideos(channelId, options) {
+export default async function* searchVideos(channelId:string, options:Options) {
 
   const playlistId = await fetchPlaylistId(channelId)
 
-  let pageToken = options.pageToken
+  let pageToken:string|null|undefined = options.pageToken
   let page = 0
   while (true) {
 
@@ -46,11 +48,11 @@ module.exports = async function* searchVideos(channelId, options) {
 
     console.log(`fetch start pageToken: ${pageToken} page: ${page}`)
 
-    const response = await youtube.playlistItems.list({
+    const response = await (youtube.playlistItems).list({
       playlistId,
       ...DEFAULT_PARAMS,
       ...(pageToken ? {pageToken} : {}),
-    })
+    } as youtube_v3.Params$Resource$Playlistitems$List) as {data:youtube_v3.Schema$PlaylistItemListResponse}
 
     if (!response.data.items || response.data.items.length === 0) {
       break

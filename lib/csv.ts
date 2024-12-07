@@ -1,5 +1,5 @@
 import {createObjectCsvWriter} from "csv-writer"
-import config from "./config"
+import {config} from "./config"
 import {ObjectStringifierHeader} from "csv-writer/src/lib/record";
 import {CsvWriter} from "csv-writer/src/lib/csv-writer";
 import {ObjectMap} from "csv-writer/src/lib/lang/object";

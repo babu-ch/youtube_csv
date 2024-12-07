@@ -1,4 +1,4 @@
-import {Options} from "./config"
+import {Config} from "./config"
 import dotenv from "dotenv"
 dotenv.config()
 import {google} from "googleapis"
@@ -36,7 +36,7 @@ async function fetchPlaylistId(channelId:string) {
   return id
 }
 
-export default async function* searchVideos(channelId:string, options:Options) {
+export default async function* searchVideos(channelId:string, options:Config["options"]) {
 
   const playlistId = await fetchPlaylistId(channelId)
 

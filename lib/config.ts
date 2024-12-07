@@ -14,9 +14,9 @@ export function createCLI() {
 }
 
 const schema = z.object({
-  waitMs: z.number(),
+  waitMs: z.number().positive(),
   pageToken: z.string(),
-  maxPage: z.number(),
+  maxPage: z.number().min(0),
   output: z.string().regex(/.+\.csv$/),
   fields: z.string().regex(/^(\w+:[\w.]+,?)+$/),
 })

@@ -19,7 +19,7 @@ const youtube = google.youtube({
   auth: API_KEY,
 })
 
-async function fetchPlaylistId(channelId:string) {
+export async function fetchPlaylistId(channelId:string) {
   const res = await youtube.channels.list({
     id: [channelId],
     part: ["contentDetails,snippet"]
@@ -36,7 +36,7 @@ async function fetchPlaylistId(channelId:string) {
   return id
 }
 
-export default async function* searchVideos(channelId:string, options:Config["options"]) {
+export async function* searchVideos(channelId:string, options:Config["options"]) {
 
   const playlistId = await fetchPlaylistId(channelId)
 

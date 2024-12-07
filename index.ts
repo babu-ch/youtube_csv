@@ -1,4 +1,4 @@
-import searchVideos from "./lib/api"
+import {searchVideos} from "./lib/api"
 import CSV from "./lib/csv"
 import {get} from "lodash"
 import {config, parseCLI} from "./lib/config"

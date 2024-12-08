@@ -1,7 +1,9 @@
-import searchVideos from "./lib/api"
+import {searchVideos} from "./lib/api"
 import CSV from "./lib/csv"
 import {get} from "lodash"
-import config from "./lib/config"
+import {config, parseCLI} from "./lib/config"
+
+parseCLI(process.argv)
 
 async function main() {
   const fields = config.options.fields.split(",").map(f => f.split(":"))

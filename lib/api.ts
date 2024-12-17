@@ -38,7 +38,7 @@ export async function fetchPlaylistId(channelId:string) {
 
 export async function* searchVideos(channelId:string, options:Config["options"]) {
 
-  const playlistId = await fetchPlaylistId(channelId)
+  const playlistId = options.playListId ? options.playListId : await fetchPlaylistId(channelId)
 
   let pageToken:string|null|undefined = options.pageToken
   let page = 0

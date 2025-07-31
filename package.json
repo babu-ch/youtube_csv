@@ -12,11 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "@types/lodash": "^4.17.13",
-    "commander": "^12.1.0",
     "csv-writer": "^1.6.0",
     "dotenv": "^16.4.5",
     "google-auth-library": "^9.15.0",
     "googleapis": "^144.0.0",
+    "gunshi": "^0.26.3",
     "lodash": "^4.17.21",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",

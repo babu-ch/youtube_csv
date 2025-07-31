@@ -1,19 +1,56 @@
 import z from "zod";
-import {Command} from "commander"
+import {define} from "gunshi"
 
 export function createCLI() {
-  const program = new Command()
-  program
-    .arguments("<requiredArg>")
-    .option("--waitMs <waitMs>", "1回取得ごとにsleepするms", (val) => parseInt(val, 10),100)
-    .option("--pageToken <pageToken>", "pageToken 前回の続きからデータ取得する場合", "")
-    .option("--maxPage <maxPage>", "取得するページ数", (val) => parseInt(val, 10),0)
-    .option("--output <output>", "ファイル名を指定したい場合 ex:test.csv", "output.csv")
-    .option("--fields <fields>", "取得するフィールド カラム名:アクセスするフィールド をカンマ区切りで指定", "id:snippet.resourceId.videoId,title:snippet.title,description:snippet.description,thumbnail:snippet.thumbnails.default.url,published:snippet.publishedAt")
-    // memo 指定時channel無視するなら全部optionにした方がいいか...
-    .option("--playListId <playListId>", "playlistのid. 指定時はchannelを無視", "")
-  return program
+  // const program = new Command()
+  // program
+  //   .arguments("<requiredArg>")
+  //   .option("--waitMs <waitMs>", "1回取得ごとにsleepするms", (val) => parseInt(val, 10),100)
+  //   .option("--pageToken <pageToken>", "pageToken 前回の続きからデータ取得する場合", "")
+  //   .option("--maxPage <maxPage>", "取得するページ数", (val) => parseInt(val, 10),0)
+  //   .option("--output <output>", "", "output.csv")
+  //   .option("--fields <fields>", "取得するフィールド カラム名:アクセスするフィールド をカンマ区切りで指定", "id:snippet.resourceId.videoId,title:snippet.title,description:snippet.description,thumbnail:snippet.thumbnails.default.url,published:snippet.publishedAt")
+  //   .option("--playListId <playListId>", "playlistのid. 指定時はchannelを無視", "")
+  // return program
 }
+const command = define({
+  name: 'greeter',
+  description: 'A simple greeting CLI',
+  args: {
+    channelId: {
+      type: 'string',
+      positional: true,
+      description: '取得するチャンネルのID'
+    },
+    waitMs: {
+      type: 'number',
+      description: '1回取得ごとにsleepするms'
+    },
+    pageToken: {
+      type: 'string',
+      description: 'pageToken 前回の続きからデータ取得する場合'
+    },
+    maxPage: {
+      type: 'number',
+      description: '取得するページ数'
+    },
+    output: {
+      type: 'string',
+      description: 'ファイル名を指定したい場合 ex:test.csv'
+    },
+    fields: {
+      type: 'string',
+      description: '取得するフィールド カラム名:アクセスするフィールド をカンマ区切りで指定'
+    },
+    // memo 指定時channel無視するなら全部optionにした方がいいか...
+    playListId: {
+      type: 'string',
+      description: 'playlistのid. 指定時はchannelを無視'
+    },
+  },
+  run: (ctx) => {
+  }
+})
 
 const schema = z.object({
   waitMs: z.number().positive(),

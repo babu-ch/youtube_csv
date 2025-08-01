@@ -1,5 +1,6 @@
 import z from "zod";
 import {Args, CommandContext, define} from "gunshi";
+import {main} from "./main";
 
 const examples = `
 # Examples
@@ -72,8 +73,7 @@ export const command = define({
   args,
   examples,
   run: async (ctx) => {
-    console.log(ctx.values)
-    // await main(ctx.values)
+    await main(ctx.values)
   }
 })
 

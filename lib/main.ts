@@ -1,7 +1,7 @@
 import CSV from "./csv";
 import {searchVideos} from "./api";
 import {get} from "lodash";
-import {Config} from "../index";
+import {Config} from "./command";
 
 export async function main(config: Config) {
   const fields = config.fields.split(",").map(f => f.split(":"))

@@ -47,8 +47,8 @@ export type Ctx = CommandContext<typeof args>
 export type Config = Ctx['values']
 
 const command = define({
-  name: 'greeter',
-  description: 'A simple greeting CLI',
+  name: 'youtube_csv',
+  description: 'This is a tool to convert videos from a specific YouTube channel into CSV.',
   args,
   run: async (ctx) => {
     console.log(ctx.values)

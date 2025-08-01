@@ -4,6 +4,9 @@ import z from "zod";
 const examples = `
 # Examples
 
+# help
+$ npm run start -- --help
+
 # maxPage=1でお試し
 $ npm run start -- <channelId> --maxPage=1
 

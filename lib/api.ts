@@ -3,7 +3,7 @@ dotenv.config()
 import {google} from "googleapis"
 import {get} from "lodash"
 import {youtube_v3} from "googleapis/build/src/apis/youtube/v3";
-import {Config} from "../index";
+import {Config} from "./command";
 
 const API_KEY = process.env.YOUTUBE_API_KEY
 

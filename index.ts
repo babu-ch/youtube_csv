@@ -7,10 +7,10 @@ const args = {
     description: '取得するチャンネルのID'
   },
   waitMs: {
-    type: 'number',
+    type: 'custom',
     description: '1回取得ごとにsleepするms',
     default: 100,
-    parse: v => z.number().positive().parse(v)
+    parse: v => z.number().positive().parse(Number(v))
   },
   pageToken: {
     type: 'string',
@@ -18,19 +18,19 @@ const args = {
     default: '',
   },
   maxPage: {
-    type: 'number',
+    type: 'custom',
     description: '取得するページ数',
     default: 0,
-    parse: v => z.number().min(0).parse(v)
+    parse: v => z.number().min(0).parse(Number(v))
   },
   output: {
-    type: 'string',
+    type: 'custom',
     description: 'ファイル名を指定したい場合 ex:test.csv',
     default: 'output.csv',
     parse: v => z.string().regex(/.+\.csv$/).parse(v)
   },
   fields: {
-    type: 'string',
+    type: 'custom',
     description: '取得するフィールド カラム名:アクセスするフィールド をカンマ区切りで指定',
     default: 'id:snippet.resourceId.videoId,title:snippet.title,description:snippet.description,thumbnail:snippet.thumbnails.default.url,published:snippet.publishedAt',
     parse: v => z.string().regex(/^(\w+:[\w.]+,?)+$/).parse(v)

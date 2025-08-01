@@ -1,7 +1,7 @@
 import dotenv from "dotenv"
 dotenv.config()
 import {google} from "googleapis"
-import {get} from "lodash"
+import {get} from "lodash-es"
 import {youtube_v3} from "googleapis/build/src/apis/youtube/v3";
 import {Config} from "./command";
 

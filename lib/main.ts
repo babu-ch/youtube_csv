@@ -1,6 +1,6 @@
 import CSV from "./csv";
 import {searchVideos} from "./api";
-import {get} from "lodash";
+import {get} from "lodash-es";
 import {Config} from "./command";
 
 export async function main(config: Config) {

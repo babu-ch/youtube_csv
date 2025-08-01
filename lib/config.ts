@@ -13,46 +13,7 @@ export function createCLI() {
   //   .option("--playListId <playListId>", "playlistのid. 指定時はchannelを無視", "")
   // return program
 }
-const command = define({
-  name: 'greeter',
-  description: 'A simple greeting CLI',
-  args: {
-    channelId: {
-      type: 'string',
-      positional: true,
-      description: '取得するチャンネルのID'
-    },
-    waitMs: {
-      type: 'number',
-      description: '1回取得ごとにsleepするms'
-    },
-    pageToken: {
-      type: 'string',
-      description: 'pageToken 前回の続きからデータ取得する場合'
-    },
-    maxPage: {
-      type: 'number',
-      description: '取得するページ数'
-    },
-    output: {
-      type: 'string',
-      description: 'ファイル名を指定したい場合 ex:test.csv'
-    },
-    fields: {
-      type: 'string',
-      description: '取得するフィールド カラム名:アクセスするフィールド をカンマ区切りで指定'
-    },
-    // memo 指定時channel無視するなら全部optionにした方がいいか...
-    playListId: {
-      type: 'string',
-      description: 'playlistのid. 指定時はchannelを無視'
-    },
-  },
-  run: (ctx) => {
-  }
-})
-
-const schema = z.object({
+export const schema = z.object({
   waitMs: z.number().positive(),
   pageToken: z.string(),
   maxPage: z.number().min(0),

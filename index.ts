@@ -1,25 +1,54 @@
-import {searchVideos} from "./lib/api"
-import CSV from "./lib/csv"
-import {get} from "lodash"
-import {config, parseCLI} from "./lib/config"
+import {schema} from "./lib/config"
+import {Args, CommandContext, define} from "gunshi";
+import {main} from "./lib/main";
 
-parseCLI(process.argv)
+const args = {
+  channelId: {
+    type: 'positional',
+    description: '取得するチャンネルのID'
+  },
+  waitMs: {
+    type: 'number',
+    description: '1回取得ごとにsleepするms',
+    default: 100,
+    parse: v => schema.shape.waitMs.parse(v)
+  },
+  pageToken: {
+    type: 'string',
+    description: 'pageToken 前回の続きからデータ取得する場合',
+    default: '',
+  },
+  maxPage: {
+    type: 'number',
+    description: '取得するページ数',
+    default: 0
+  },
+  output: {
+    type: 'string',
+    description: 'ファイル名を指定したい場合 ex:test.csv',
+    default: 'output.csv',
+  },
+  fields: {
+    type: 'string',
+    description: '取得するフィールド カラム名:アクセスするフィールド をカンマ区切りで指定',
+    default: 'id:snippet.resourceId.videoId,title:snippet.title,description:snippet.description,thumbnail:snippet.thumbnails.default.url,published:snippet.publishedAt'
+  },
+  // memo 指定時channel無視するなら全部optionにした方がいいか...
+  playListId: {
+    type: 'string',
+    description: 'playlistのid. 指定時はchannelを無視',
+    default: ''
+  },
+} satisfies Args
 
-async function main() {
-  const fields = config.options.fields.split(",").map(f => f.split(":"))
-
-  const header = fields.map(f => ({id:f[0], title:f[0]}))
-  const csv = new CSV(config.options.output, header)
-
-  for await (const videos of searchVideos(config.channelId, config.options)) {
-
-    const data = videos.map(video => {
-      return Object.fromEntries(fields.map(f => ([f[0], get(video, f[1])])))
-    })
-    await csv.write(data)
-
-    await new Promise(resolve => setTimeout(resolve, config.options.waitMs))
+define({
+  name: 'greeter',
+  description: 'A simple greeting CLI',
+  args,
+  run: async (ctx) => {
+    await main(ctx.values)
   }
-}
+})
 
-main()
+export type Ctx = CommandContext<typeof args>
+export type Config = Ctx['values']

@@ -1,9 +1,9 @@
-import {Config} from "./config"
 import dotenv from "dotenv"
 dotenv.config()
 import {google} from "googleapis"
 import {get} from "lodash"
 import {youtube_v3} from "googleapis/build/src/apis/youtube/v3";
+import {Config} from "../index";
 
 const API_KEY = process.env.YOUTUBE_API_KEY
 
@@ -36,7 +36,7 @@ export async function fetchPlaylistId(channelId:string) {
   return id
 }
 
-export async function* searchVideos(channelId:string, options:Config["options"]) {
+export async function* searchVideos(channelId:string, options:Config) {
 
   const playlistId = options.playListId ? options.playListId : await fetchPlaylistId(channelId)
 

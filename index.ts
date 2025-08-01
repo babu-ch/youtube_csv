@@ -1,6 +1,23 @@
 import {Args, cli, CommandContext, define} from "gunshi";
 import z from "zod";
 
+const examples = `
+# Examples
+
+# maxPage=1でお試し
+$ npm run start -- <channelId> --maxPage=1
+
+# 全動画取得
+npm run start -- <channelId>
+
+# pageTokenを指定してページの途中から取得(append)
+node run start -- <ch> --output=test.csv --pageToken=token --maxPage=5
+
+# 取得フィールドを変更
+# フィールドはこちらから確認 https://developers.google.com/youtube/v3/docs/playlistItems?hl=ja#resource
+node run start -- <ch> --output=test.csv --maxPage=1 --fields=id:snippet.resourceId.videoId,title:snippet.title,published:snippet.publishedAt
+`
+
 const args = {
   channelId: {
     type: 'positional',
@@ -50,6 +67,7 @@ const command = define({
   name: 'youtube_csv',
   description: 'This is a tool to convert videos from a specific YouTube channel into CSV.',
   args,
+  examples,
   run: async (ctx) => {
     console.log(ctx.values)
     // await main(ctx.values)

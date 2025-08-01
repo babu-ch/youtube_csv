@@ -49,7 +49,10 @@ describe("searchVideos", () => {
     playlistApi.mockReturnValue({ data: { items: [
       videoItem
         ] } })
-    const iter =  searchVideos("id", {fields: "", maxPage: 0, output: "", pageToken: "", waitMs: 0})
+    const iter =  searchVideos("id", {
+      channelId: '',
+      playListId: '',
+      fields: "", maxPage: 0, output: "", pageToken: "", waitMs: 0})
     const res = await iter.next()
     expect((res.value as youtube_v3.Schema$PlaylistItem[])[0]).toBe(videoItem)
   })

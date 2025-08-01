@@ -1,27 +1,31 @@
 {
   "name": "youtube_csv",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "npx ts-node index.ts",
+    "start": "tsx index.ts",
+    "doc": "tsx lib/generate-doc.ts",
     "test": "vitest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/lodash": "^4.17.13",
-    "commander": "^12.1.0",
     "csv-writer": "^1.6.0",
     "dotenv": "^16.4.5",
     "google-auth-library": "^9.15.0",
     "googleapis": "^144.0.0",
-    "lodash": "^4.17.21",
+    "gunshi": "^0.26.3",
+    "lodash-es": "^4.17.21",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8",
     "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12"
   }
 }

@@ -1,5 +1,4 @@
 import {createObjectCsvWriter} from "csv-writer"
-import {config} from "./config"
 import {ObjectStringifierHeader} from "csv-writer/src/lib/record";
 import {CsvWriter} from "csv-writer/src/lib/csv-writer";
 import {ObjectMap} from "csv-writer/src/lib/lang/object";
@@ -7,11 +6,11 @@ import {ObjectMap} from "csv-writer/src/lib/lang/object";
 export default class CSV {
 
   private csvWriter: CsvWriter<ObjectMap<any>>;
-  constructor(filePath:string, header:ObjectStringifierHeader) {
+  constructor(filePath:string, header:ObjectStringifierHeader, append: boolean) {
     this.csvWriter = createObjectCsvWriter({
       path: filePath,
       header,
-      append: !!config.options.pageToken
+      append
     })
   }
 

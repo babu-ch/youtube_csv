@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "tsx index.ts",
+    "doc": "tsx lib/generate-doc.ts",
     "test": "vitest"
   },
   "keywords": [],

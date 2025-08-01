@@ -3,6 +3,12 @@ import {Args, CommandContext, define} from "gunshi";
 import {main} from "./main";
 
 const examples = `
+# install
+
+$ cp .env.example .env # .envにAPIキー設定
+
+$ npm i
+
 # Examples
 
 # help
@@ -12,14 +18,14 @@ $ npm run start -- --help
 $ npm run start -- <channelId> --maxPage=1
 
 # 全動画取得
-npm run start -- <channelId>
+$ npm run start -- <channelId>
 
 # pageTokenを指定してページの途中から取得(append)
-node run start -- <channelId> --output=test.csv --pageToken=token --maxPage=5
+$ node run start -- <channelId> --output=test.csv --pageToken=token --maxPage=5
 
 # 取得フィールドを変更
 # フィールドはこちらから確認 https://developers.google.com/youtube/v3/docs/playlistItems?hl=ja#resource
-node run start -- <channelId> --output=test.csv --maxPage=1 --fields=id:snippet.resourceId.videoId,title:snippet.title,published:snippet.publishedAt
+$ node run start -- <channelId> --output=test.csv --maxPage=1 --fields=id:snippet.resourceId.videoId,title:snippet.title,published:snippet.publishedAt
 `
 
 const args = {

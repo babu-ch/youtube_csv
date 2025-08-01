@@ -10,7 +10,7 @@ export async function generateDoc() {
     description: command.description,
   })
 
-  await fs.writeFile('./docs/cli-usage.md', `# CLI Usage\n\n\`\`\`sh\n${usageText}\n\`\`\``, 'utf8')
+  await fs.writeFile('./README.md', `# CLI Usage\n\n\`\`\`sh\n${usageText}\n\`\`\`\n# description\nhttps://qiita.com/babu-ch/items/5ee4e8f3342be123b1ea`, 'utf8')
 
   console.log('Documentation generated successfully!')
 }

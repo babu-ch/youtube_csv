@@ -1,6 +1,4 @@
-import {schema} from "./lib/config"
-import {Args, CommandContext, define} from "gunshi";
-import {main} from "./lib/main";
+import {Args, cli, CommandContext, define} from "gunshi";
 import z from "zod";
 
 const args = {
@@ -45,14 +43,17 @@ const args = {
   },
 } satisfies Args
 
-define({
+export type Ctx = CommandContext<typeof args>
+export type Config = Ctx['values']
+
+const command = define({
   name: 'greeter',
   description: 'A simple greeting CLI',
   args,
   run: async (ctx) => {
-    await main(ctx.values)
+    console.log(ctx.values)
+    // await main(ctx.values)
   }
 })
 
-export type Ctx = CommandContext<typeof args>
-export type Config = Ctx['values']
+await cli(process.argv.slice(2), command)
